@@ -3,11 +3,15 @@ const strictEquals = function (a, b) {
     if (isNaN(a) && isNaN(b)) {
       return false;
     }
-    return true;
   } else {
+    if (Object.is(a, 0) && Object.is(b, -0)) {
+      return true;
+    }
+    if (Object.is(a, -0) && Object.is(b, 0)) {
+      return true;
+    }
     return false;
   }
 };
 
-strictEquals(1, 1);
-strictEquals(NaN, NaN);
+strictEquals(0, -0);
